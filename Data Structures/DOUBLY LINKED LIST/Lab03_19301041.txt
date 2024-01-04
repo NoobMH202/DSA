@@ -1,0 +1,165 @@
+#================================================================
+#task-01 (i)
+'''
+class Node:
+    def __init__(self,element,ref,prev):
+        self.element=element
+        self.ref=ref
+        self.prev=prev
+
+#==============================================================
+#task-01 (ii)
+class DoublyList:
+    def __init__(self,element,ref,prev):
+        self.head=Node(None,None,None) 
+        self.head.next=self.head.prev=self.head
+'''
+        
+#=============================================================
+#task-02 (i)
+class Node:
+    def __init__(self,v,n,p):
+        self.value=v
+        self.next=n
+        self.prev=p
+        
+#==============================================================
+class DoublyList:
+    def __init__(self,a):
+        
+        self.head=Node(None,None,None) #dummy node
+        self.head.next=self.head.prev=self.head #circular
+        dummy=self.head 
+        for i in a:
+            if dummy.next is dummy:
+                newNode=Node(i,None,None)
+                newNode.next=self.head
+                newNode.prev=self.head.prev
+                self.head.prev.next=newNode
+                self.head.prev=newNode
+                tail=newNode
+            else:              
+                newNode=Node(i,None,None)
+                newNode.next=self.head
+                newNode.prev=tail
+                self.head.prev=newNode
+                tail.next=newNode
+                tail=newNode
+            
+            
+        
+            
+#=============================================================            
+#task-02 (ii)
+    def showList(self):
+        n=self.head.next
+        if n.value is None:
+            raise Exception('list cannot be empty')
+        else:
+            while n is not self.head:
+                print(n.value,end=' ')
+                n=n.next
+               
+        
+                    
+                
+    
+#=============================================================            
+#task-02 (iii)
+
+    def insert(self,newElement):  
+        notun_node=newElement
+        n=self.head.next 
+        while n is not self.head:      
+            if n.value == notun_node.value:
+                print('value already ase')
+                return
+            n=n.next
+            
+        while n.next is not self.head:
+            notun_node.next=self.head
+            notun_node.prev=self.head.prev
+            self.head.prev.next=notun_node
+            self.head.prev=notun_node
+            n=n.next
+            return
+        
+#=============================================================            
+#task-02 (iv)
+
+    def insertIndex(self,newElement,index):
+        n=self.head.next
+        newNode=Node(newElement,None,None)
+        if index<0 or index>len(a):
+            raise IndexError('invalid index')
+        if n.value is None:
+            raise Exception('list cannot be empty')
+        while n is not self.head:      
+           if n.value == newElement:
+               print('value already ase')
+               return
+           n=n.next
+        
+                 
+        cnt=0
+        n = self.head.next
+        x=self.head.next
+        while n is not x or cnt == 0:      
+            if cnt is index:
+                newNode.next=n
+                newNode.prev=n.prev
+                n.prev.next=newNode
+                n.prev=newNode
+                
+                break
+            cnt=cnt+1
+            n=n.next
+                
+        
+#=============================================================            
+#task-02 (v)            
+    
+    def remove(self,index):
+        n=self.head.next
+        cnt=0
+        if n.value is None:
+            raise Exception('list cannot be empty')
+        if index<0 or index>len(a):
+            raise IndexError('invalid index')
+            
+            
+        while n is not self.head:
+            if cnt is index:
+                k=n.prev
+                k.next=n.next
+                n.next.prev=k
+       
+                break
+            else:
+                cnt=cnt+1
+            n=n.next
+            
+        
+ 
+#=============================================================            
+#task-02 (vi)        
+ 
+    def removeKey(self,deleteKey):
+        n=self.head.next
+        k=deleteKey
+        while n is not self.head:
+            if n.value is k:
+                n.prev.next=n.next
+                n.next.prev=n.prev    
+            n=n.next
+                
+            
+#a=[]    
+a=[1,2,3]
+list=DoublyList(a)
+#newElement=Node(20,None,None)
+#list.insert(newElement)
+#list.insertIndex(7,0)
+#list.remove(3)
+#list.removeKey(30)
+list.showList()

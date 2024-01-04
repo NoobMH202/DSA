@@ -1,0 +1,134 @@
+#LAB-07 Key Index Searching & Sorting, Hashing
+
+#=================================================================
+#TASK-01
+'''
+class KeyIdx:
+    aux=[]
+    def __init__(self,a):
+        self.aux=a
+    def search_koro (self,data):
+        flag="No"
+        for k in self.aux:
+            if k<0:
+                flag="Yes"
+        if flag== "Yes":
+            min=0
+            for i in self.aux:
+                if i is not min:
+                    min=i
+            pos_min=min*(-1)
+            for i in range(0,len(self.aux),1):
+                self.aux[i]=self.aux[i]+pos_min
+            data=data+pos_min
+        max=0
+        for i in self.aux:
+            if i>max:
+                max=i
+        new_arr=[0]*(max+1)
+        for i in self.aux:
+        
+            new_arr[i]=new_arr[i]+1
+        if data<len(new_arr) and data>0:
+            if new_arr[data]!=0:
+                print(True)
+            else:
+                print(False)
+        else:
+            print(False)
+    
+       
+            
+    def sort_koro(self):
+        flag="No"
+        for k in self.aux:
+            if k < 0:
+                flag="Yes"
+        if flag=="Yes":
+            min=0
+            for i in self.aux:
+                if i is not min:
+                    min=i
+            pos_min=min*(-1)
+            for i in range(0,len(self.aux),1):
+                self.aux[i]=self.aux[i]+pos_min
+            
+            max=0
+            for i in self.aux:
+                if i>max:
+                    max=i
+            new_arr=[0]*(max+1)
+            
+            for i in self.aux:
+                new_arr[i]=new_arr[i]+1
+            i=0
+            a=[]
+            for i in range(0,len(new_arr)):
+                if new_arr[i]!=0:
+                    q=0
+                    while(q is not new_arr[i]):
+                        a.append(i-pos_min)
+                        q=q+1
+            print(a)
+        else:
+            max=0
+            for i in self.aux:
+                if i>max:
+                    max=i
+            new_arr2=[0]*(max+1)
+            
+            for i in self.aux:
+                new_arr2[i]=new_arr2[i]+1
+            i=0
+            k=[]
+            for i in range(0,len(new_arr2)):
+                if new_arr2[i]!=0:
+                    q=0
+                    while(q is not new_arr2[i]):
+                        k.append(i)
+                        q=q+1      
+            print(k)
+
+        
+arr=[1,9,3,0,1,0,4,1]
+my_arr=KeyIdx(arr) 
+my_arr.sort_koro()
+'''
+
+#=================================================================
+#TASK-02
+'''
+def hTable(a): 
+    aux=[0]*9
+    count_cons = 0
+    digit=''
+    sum_digit = 0
+    for i in range(len(a)):
+        if ord(a[i]) > 64 and ord(a[i]) < 91 and int(ord(a[i])) not in [65,69,73,79,85]:
+            count_cons+=1
+
+        elif ord(a[i]) > 64 and ord(a[i]) < 91 and int(ord(a[i])) in [65,69,73,79,85]: 
+            pass
+        
+        else:
+            digit+=a[i]
+
+    for i in digit:
+        sum_digit+=int(i)
+
+    hashidx = (count_cons*24 + sum_digit)%9
+    return hashidx
+    flag=True
+    if aux[hashidx] == 0:
+        aux[hashidx]=a
+    else:
+        while flag:
+            hashidx=(hashidx+1)%len(aux)
+            if aux[hashidx]==0:
+                aux[hashidx]=a
+                break
+
+a = input("Enter a string : ")
+index = hTable(a)
+print("It will be stored in index [",index,"] of the hash table.")
+'''

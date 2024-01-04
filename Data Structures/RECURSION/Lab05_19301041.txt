@@ -1,0 +1,209 @@
+#LAB-05 recursion
+#=================================================================
+
+#TASK-01
+#(a)factorial using recursion
+'''
+def factorial(n):
+    if n ==  1:
+        return 1
+    return n*factorial(n-1)
+print(factorial(3))
+'''
+
+#(b)fibonacci recursion
+'''
+def fib(n):
+    if n > 1:
+        return fib(n-1)+fib(n-2)
+    elif n==1 :
+        return 1
+    else:
+        return 0
+
+print(fib(3))
+'''
+
+#(c)recursion iteration
+'''
+def forward(a,index):
+    if index is len(a):
+        return
+    else:
+        print(a[index])
+        forward(a, index+1)
+a=[1,2,3,4,5]        
+forward(a, 0)
+'''
+
+#(d)base and power
+'''
+def powerN(b,p):
+    if p==1:
+        return b
+    else:
+        return b*powerN(b, p-1)
+print(powerN(3, 4))
+'''
+#==================================================================
+
+#TASK-02
+#(a)decimal to binary
+'''
+def convertBin(n):
+    if n == 0:
+        return 0
+    else:
+        return convertBin(n//2)*10+(n%2)
+print(convertBin(10))
+'''
+
+#(b)addition of singly linked list
+'''
+class Node:
+    def __init__(self,v,n):
+        self.value = v #v refers to an int element
+        self.next = n #n is a reference to the next Node
+class MyList:
+    def __init__(self, a):
+        self.head = None
+        tail = None
+        for i in a:
+            newNode = Node(i,None)
+            if (self.head == None):
+                self.head = newNode
+                tail = newNode
+            else:
+                tail.next = newNode
+                tail = newNode
+                 
+    def addition(self,h):
+        if h.next is None:
+            return h.value
+        else:
+            return h.value+list.addition(h.next)
+
+        
+#(c)reverse order   
+ 
+    def reverse(self,head):
+        if head.next is None:
+            print(head.value)
+        else:
+            list.reverse(head.next)
+            print(head.value) 
+
+        
+    
+a=[1,2,3,4,5]
+list=MyList(a)
+x=list.head
+print(list.addition(x))
+list.reverse(x)
+'''
+#==================================================================
+
+#TASK-03
+'''
+def hocBuilder(height):
+    if height==1:
+        return 8
+    else:
+        return 5+hocBuilder(height-1)
+        
+print(hocBuilder(2))
+'''
+#==================================================================
+
+#TASK-04
+#(a)pattern(1)
+'''
+def pattern1(x):
+    
+    if x==0:
+        return
+    pattern1(x-1)
+    printNum(x)
+    print()
+    
+    
+def printNum(x):
+    if x==0:
+        return 
+    printNum(x-1)
+    print(x,end='')
+        
+x=int(input('please enter a number: '))
+pattern1(x)
+'''
+
+#(b)pattern(2)
+'''
+def pattern2(x,i):
+
+        if x+1==i:
+            return  
+        space(x-i)
+        printNum(i,0)
+        print()
+        pattern2(x,i+1)
+        
+        
+def space(x):
+    if x==0:
+        return
+    print(' ',end='')
+    space(x-1)
+       
+def printNum(i,n):
+    if n==i:
+        return 
+    print(n+1,end='')
+    printNum(i,n+1)
+    
+
+x=int(input('please enter a number: '))
+pattern2(x,1)
+'''
+
+#==================================================================
+
+#TASK-05
+'''
+import sys
+print(sys.getrecursionlimit())
+sys.setrecursionlimit(15000)
+
+class FinalQ:
+    def print(self,array,idx):
+        if(idx<len(array)):
+            profit = self.calcProfit(array[idx])
+            print("Investment:",array[idx],"; Profit:", profit)
+
+            self.print(array,idx+1)
+        else: 
+            return
+
+    def calcProfit(self,investment):       
+        if investment <= 25000 :
+            return 0.0
+        elif investment > 25000 and investment <= 100000 :
+            #temp = (investment - 25000)*4.5//100
+            #return temp
+            #temp = (investment - 25000)
+            #return self.calcProfit(temp+4.5//100)
+            return 4.5+self.calcProfit(investment-100)
+        
+            
+        else:
+            
+            
+            #temp1 = (investment - 100000)*8//100 + 75000*4.5//100
+            #return temp1
+            #temp1 = (investment - 100000)
+            #return self.calcProfit(temp1+8//100)+self.calcProfit(75000+4.5//100)
+            return 8+self.calcProfit(investment-100)
+array=[25000,100000,250000,350000]
+f = FinalQ()
+f.print(array,0)
+'''

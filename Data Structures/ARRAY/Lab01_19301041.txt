@@ -1,0 +1,207 @@
+#task-01
+'''
+def shiftLeft(source,k):
+    for i in range(0,k):
+        for j in range(len(source)-1):
+            source[j]=source[j+1]
+        source[len(source)-1]=0
+    print('after shifting left:', source)
+source=[10,20,30,40,50,60]
+shiftLeft(source,3)
+'''
+
+#task-02
+'''
+def rotateLeft(source,k):
+    for j in range(0,k):
+        tmp = source[0]
+        for i in range(len(source) - 1):
+            source[i] = source[i + 1]
+        source[len(source) - 1] = tmp
+    print('after rotating left:', source)
+source=[10,20,30,40,50,60]
+rotateLeft(source,3)
+'''
+
+#task-03
+'''
+def remove(source,size,idx):
+    while (idx<=size):
+        source[idx]=source[idx+1]
+        idx=idx+1
+    print('after removing:',source)
+source=[10,20,30,40,50,0,0]
+remove(source,5,2)
+'''
+
+#task-04 
+'''
+def removeAll(source,size,element):
+    for i in range(size):
+      if source[i]==element:
+        j=i
+        while j<size:
+            source[j]=source[j+1]
+            j=j+1
+      source[size-1]=0
+    print('after removal of all occurance:',source)
+source=[10,2,30,2,50,2,2,0,0]
+removeAll(source,7,2)
+'''
+
+#task-05
+'''
+def split(a,size):
+    sum1=0
+    sum1=int(sum1)
+    sum2 = 0
+    sum2 = int(sum2)
+    for i in range(0,(size//2)+1):
+        sum1=sum1+a[i]
+    for j in range((size//2)+1,len(a)):
+        sum2=sum2+a[j]
+    if (sum1==sum2):
+       print('true')
+    else:
+        sum3 = 0
+        sum3 = int(sum3)
+        sum4 = 0
+        sum4 = int(sum4)
+        for i in range(0, (size // 2)):
+            sum3 = sum3 + a[i]
+        for j in range((size // 2), len(a)):
+            sum4 = sum4 + a[j]
+        if (sum3 == sum4):
+            print('true')
+        else:
+            print('false')
+#a=[1,1,1,2,1]
+#a=[2,1,1,2,1]
+a=[10,3,1,2,10]
+split(a,5)
+'''
+
+#task-06
+'''
+def array_series(input):
+  count = 0
+  new_array=[0]*(input*input)
+  for element in range (1,input+1):
+    var1=input
+    for j in range(input-element):
+      new_array[count]=0
+      var1=var1-1
+      count=count+1
+    for k in range(element):
+      new_array[count]=var1
+      var1=var1-1
+      count=count+1
+  return new_array
+print(array_series(2))
+'''
+
+#task-07
+'''
+def bunch(a,size):
+    max_count=1
+    count=1
+    for i in range(size-1):
+        if(a[i]==a[i+1]):
+            count=count+1
+        else:
+            count=1
+        if (count>max_count):
+            max_count=count
+    return max_count
+a=[1,2,2,3,4,4,4]
+print(bunch(a,7))
+'''
+
+#task-08
+'''
+def repetation(list):
+  newList=[0]*len(list)
+  a=0
+  count=1
+  for i in range(len(list) - 1):
+    for j in range(0, len(list) - i - 1):
+      if (list[j] > list[j + 1]):
+        temp = list[j]
+        list[j] = list[j + 1]
+        list[j + 1] = temp
+  print('previous list after sorting:',list)
+  for k in range(len(list)-1):
+    if (list[k]==list[k+1]):
+      count=count+1
+      newList[a] = count
+    else:
+      #newList[a]=count
+      a=a+1
+      count=1
+  print('values of newlist:',newList)
+  for i in range(len(newList) - 1):
+    for j in range(0, len(newList) - i - 1):
+      if (newList[j] < newList[j + 1]):
+        temp = newList[j]
+        newList[j] = newList[j + 1]
+        newList[j + 1] = temp
+  print('sorted newList:',newList)
+  for b in range(len(newList)-1):
+      if (newList[b]==newList[b+1]):
+          return True
+      else:
+          return False
+list=[4,5,6,6,4,3,6,4]
+#list=[3,4,6,3,4,7,4,6,8,6,6]
+print(repetation(list))
+'''
+
+#circular array(task-01)
+'''
+def palindrome(cir,size,st):
+    cir2=[0]*len(cir)
+    k=(st+size -1) % len(cir)
+    for i in range(0, size):
+        cir2[i]=cir[k]
+        k=k-1
+        if(k<0):
+            k=len(cir2)-1
+    print('cir2:',cir2)
+    output=False
+    y=size-1
+    for j in range(0,size):
+        if (cir2[j]==cir2[y]):
+            y=y-1
+            output=True
+        else:
+            output=False
+            break
+    print(output)
+cir=[20,10,0,0,0,10,20,30]
+#cir=[10,20,0,0,0,10,20,30]
+print('cir:',cir)
+palindrome(cir,5,5)
+'''
+
+#circular array(task-02)
+'''
+def intersection(circularArray1,circularArray2,st_1,size_1,st_2,size_2):
+    common_element=[0]*len(circularArray2)
+    k1=(st_1+size_1-1) % len(circularArray1) #end index=1
+    k2=(st_2+size_2-1) % len(circularArray2) #end index=2
+    i1=st_1 #5
+    i2=st_2 #8
+    a=0
+    for i in range(size_1):
+        i2=st_2
+        for j in range(size_2):
+            if (circularArray1[i1]==circularArray2[i2]):
+                common_element[a]=circularArray1[i1]
+                a=a+1
+            i2=(i2+1) % len(circularArray2)
+        i1=(i1+1) % len(circularArray1)
+    print('common element is:',common_element)
+circularArray1=[40,50,0,0,0,10,20,30]
+circularArray2=[10,20,5,0,0,0,0,0,5,40,15,25]
+intersection(circularArray1,circularArray2,5,5,8,7)
+'''

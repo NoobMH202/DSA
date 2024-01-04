@@ -1,0 +1,285 @@
+#LAB-06 searching and sorting
+
+#=================================================================
+#TASK-01
+'''
+def inSort(nums,j,min_position):
+    if j==len(nums):
+        return min_position
+    if nums[j]<nums[min_position]:
+        min_position=j
+     
+    return inSort(nums, j+1,min_position)
+
+def selectionSort(nums,i):
+    if i==len(nums)-1:
+        print(nums)
+        return
+    min_position=i
+    min_position=inSort(nums,i,min_position)
+    
+    tmp=nums[i]
+    nums[i]=nums[min_position]
+    nums[min_position]=tmp 
+    selectionSort(nums, i+1)     
+        
+nums=[5,3,8,7,6,2]
+selectionSort(nums,0)
+'''
+#============================================================================
+#TASK-02
+'''
+def insertionSort(nums,i):
+    if i==len(nums):
+        print(nums)
+        return
+    inSort(nums,i-1)
+    insertionSort(nums, i+1)
+    
+def inSort(nums,j):
+    if j==-1:
+        return
+    if nums[j]>nums[j+1]:
+        tmp=nums[j]
+        nums[j]=nums[j+1]
+        nums[j+1]=tmp
+    else:
+        return
+    inSort(nums, j-1)
+  
+nums=[4,2,1,5,3]
+insertionSort(nums,0)
+'''
+
+#============================================================================
+#TASK-03
+'''
+class Node:
+    def __init__(self,v,n):
+        self.value = v #v refers to an int element
+        self.next = n #n is a reference to the next Node
+class MyList:
+    def __init__(self, a):
+        self.head = None
+        tail = None
+        for i in a:
+            newNode = Node(i, None)
+            if (self.head == None):
+                self.head = newNode
+                tail = newNode
+            else:
+                tail.next = newNode
+                tail = newNode
+#=====================================================================================================
+
+    def showList(self):
+        tail=self.head
+        if (tail==None):
+            print('There is no values in the list')
+        else:
+            while(tail is not None):
+                print(tail.value, end=' ')
+                tail=tail.next
+        print()
+#=====================================================================================================
+        
+    def bubbleSort(self):
+        i=self.head
+        j=self.head
+        while(i is not None):
+            
+            while(j.next is not None):
+               
+                if j.value>j.next.value:
+                    tmp=j.value
+                    j.value=j.next.value
+                    j.next.value=tmp
+                j=j.next
+            j=self.head
+            i=i.next
+
+a=[4,2,1,5,3]
+list=MyList(a)
+list.bubbleSort()
+list.showList()
+'''
+
+#============================================================================
+#TASK-04
+'''
+class Node:
+    def __init__(self,v,n):
+        self.value = v #v refers to an int element
+        self.next = n #n is a reference to the next Node
+class MyList:
+    def __init__(self, a):
+        self.head = None
+        tail = None
+        for i in a:
+            newNode = Node(i, None)
+            if (self.head == None):
+                self.head = newNode
+                tail = newNode
+            else:
+                tail.next = newNode
+                tail = newNode
+#=====================================================================================================
+
+    def showList(self):
+        tail=self.head
+        if (tail==None):
+            print('There is no values in the list')
+        else:
+            while(tail is not None):
+                print(tail.value, end=' ')
+                tail=tail.next
+        print()
+#=====================================================================================================
+        
+    def selectionSort(self):
+        i=self.head
+        j=self.head
+        while i is not None:   
+            while j is not None:
+                if j.value>i.value:
+                    min_position=j
+                    tmp=i.value
+                    i.value=min_position.value
+                    min_position.value=tmp
+                j=j.next
+            j=self.head
+            i=i.next
+
+a=[4,2,1,5,3]
+list=MyList(a)
+list.selectionSort()
+list.showList()
+'''
+#============================================================================
+#TASK-05
+'''
+class Node:               
+    def __init__(self, prev, value, next):
+        self.prev = prev
+        self.value = value
+        self.next = next
+
+class DoublyLinkList:                  
+    def __init__(self, arr):              
+        self.head = None                  
+        self.tail = None
+        for i in arr:
+            newNode = Node(None, i , None)
+            if self.head == None:
+                self.head = newNode
+                self.tail = newNode
+            else:
+                self.tail.next = newNode
+                newNode.prev = self.tail
+                self.tail = newNode
+
+    def showList(self):                                 
+        if self.head == None:                           
+            print('list is empty')
+        else:
+            n = self.head
+            string = ""
+            seperator=" "
+            while(n is not None):
+                string += str(n.value)+seperator
+                n = n.next
+            print(string)
+            if(n is None):
+              breakpoint
+    
+    def insertionSort(self):
+        n = self.head
+        while n.next is not None:
+            j = n.next
+            while j.prev is not None :
+                if j.value < j.prev.value:
+                    tmp = j.value
+                    j.value = j.prev.value
+                    j.prev.value = tmp
+                j = j.prev
+            n = n.next 
+            
+            # for i in range(0,len(nums)):
+    #     for j in range (i-1,-1,-1):
+    #         if nums[j]>nums[j+1]:
+    #             temp=nums[j]
+    #             nums[j]=nums[j+1]
+    #             nums[j+1]=temp
+    #         else:
+    #             break
+
+list = [4,2,1,5,3]
+list=DoublyLinkList(list)
+list.insertionSort()
+list.showList()    
+'''
+#============================================================================
+#TASK-06
+'''
+position=-1
+
+#function of sorting
+def insertionSort(list,i):
+    if i==len(list):
+        print('sorted list: ',list)
+        return
+    inSort(list,i-1)
+    insertionSort(list, i+1)
+    
+def inSort(list,j):
+    if j==-1:
+        return
+    if list[j]>list[j+1]:
+        tmp=list[j]
+        list[j]=list[j+1]
+        list[j+1]=tmp
+    else:
+        return
+    inSort(list, j-1)
+#================================================================== 
+    
+#function of binary search
+def search(list,n,lower,upper):
+    if lower>upper:
+        print('not found')
+    else:
+        mid=(lower+upper)//2 
+        if list[mid]==n:
+            globals()['position']=mid
+            print('found')
+            print('found at position ',position)
+        
+        elif list[mid]<n:         
+            #lower=mid+1
+            search(list,n,mid+1,upper)
+        else:        
+            #upper=mid-1
+            search(list,n,lower,mid-1)
+
+#list=[4,7,8,12,45,99,102]
+list=[8,7,45,99,4,102,12]
+insertionSort(list,0)
+n=int(input('enter input: '))
+search(list,n,0,len(list)-1)
+'''
+#=================================================================
+#TASK-07
+'''
+def fib(n):
+    arr=[0]*(n+1)
+    if n>1:
+        return fib(n-2)+fib(n-1)
+        if arr[n-1]!=0:
+            arr[n-1]=fib(n-1)
+        elif arr[n-2]!=0:
+            arr[n-2]=fib(n-2)     
+    else:
+        arr[n]=n
+        return n
+print(fib(5))
+'''

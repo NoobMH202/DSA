@@ -1,0 +1,332 @@
+#linked_list-lab(02)
+#task-01(i)
+'''
+class Node:
+    def __init__(self, v, n):
+        self.value = v
+        self.next = n
+'''
+#======================================================================================================
+#task-01(ii)
+'''
+class MyList:
+    def __init__(self,intvalue,next):
+        self.head = None
+        tail = None
+    def showList(self):
+        pass
+    def isEmpty(self):
+        pass
+    def clear(self):
+        pass
+    def insert(self, newElement):
+        pass
+    def insert(self, newElement, index):
+        pass
+    def remove(self, deletekey):
+        pass
+'''
+#=====================================================================================================
+#new node class created for task 02
+#task-02(i) #constructor banao
+'''
+class Node:
+    def __init__(self,v,n):
+        self.value = v #v refers to an int element
+        self.next = n #n is a reference to the next Node
+class MyList:
+    def __init__(self, a):
+        self.head = None
+        tail = None
+        for i in a:
+            newNode = Node(i, None)
+            if (self.head == None):
+                self.head = newNode
+                tail = newNode
+            else:
+                tail.next = newNode
+                tail = newNode
+#=====================================================================================================
+#(ii)list dekhao
+    def showList(self):
+        tail=self.head
+        if (tail==None):
+            print('There is no values in the list')
+        else:
+            while(tail is not None):
+                print(tail.value, end=' ')
+                tail=tail.next
+        print()
+#=====================================================================================================
+#empty naki? (iii)
+    def isEmpty(self):
+        tail=self.head
+        if tail is None:
+            return True
+        else:
+            return False
+#=====================================================================================================
+#list clear koro(iv)
+    def clear(self):
+        self.head=None
+        print('clear hoye gese,yeeeey!!! :3')
+        # tail=self.head
+        # if tail is None:
+        #     raise ValueError
+#=====================================================================================================
+#list e notun value insert koro!(v)
+    def insert(self, newElement):
+        notun_node=newElement.value
+        n=self.head
+        flag=False
+        while n.next is not None:
+            if n.value==notun_node:
+                flag=True
+            n=n.next
+            if n.value==notun_node:
+                flag=True
+        if flag:
+            print("value already ase")
+        else:
+            n.next=newElement
+            
+        '''ekhane task (v) & (vi) method overload
+           er concept use kori nai. alada method
+           ey korechi'''
+#=====================================================================================================
+#list e notun value insert koro index soho:(vi)
+
+    def insert(self,newElement,index):
+        if index<0 or index>len(a):
+            raise Exception('invalid index')
+        newNode=Node(newElement,None)
+        n=self.head
+        while n is not None:
+            if n.value == newElement:
+                print('value already ase')
+                return
+            n = n.next
+            #else
+        counter = 0
+        n = self.head
+
+        while (counter is not (index - 1)):
+            n = n.next
+            counter = counter + 1
+            tmp = n.next
+            n.next = newNode
+            newNode.next = tmp
+            break
+        #n=n.next
+#=====================================================================================================
+#ebar remove koro(vii)
+    def remove(self, deletekey):
+        n=self.head
+        if n.value is deletekey:
+            self.head=n.next
+            n.next=n
+
+        while n is not None:
+            porer_node = n.next.value
+            if porer_node is deletekey:
+                tmp=n
+                break
+            n = n.next
+        tmp.next=n.next.next
+#a=[]
+a=[1,2,3,4,5]
+list=MyList(a)
+#list.clear()
+#print(list.isEmpty())
+#newElement=Node(4,None)
+#list.insert(newElement)
+#list.insert(3,2) #for task(vi)
+#list.remove(4) #for task (vii)
+#list.showList()
+'''
+
+#===========================================================
+#new node class for task 03
+'''
+class Node:
+    def __init__(self,v,n):
+        self.value = v 
+        self.next = n
+        
+class linkedList:
+    def __init__(self,a):
+        self.head=None
+        tail = None
+        for i in a:
+            newNode = Node(i,None)
+            if (self.head == None):
+                self.head = newNode
+                tail = newNode
+            else:
+                tail.next = newNode
+                tail = newNode
+                
+    def showList(self):
+        tail=self.head
+        if (tail==None):
+            print('There is no values in the list')
+        else:
+            while(tail is not None):
+                print(tail.value,end=' ')
+                tail=tail.next
+        print()
+        
+#============================================================== 
+#task-03(even kina check koro (i))    
+    def evenNaki(self):
+         n = self.head
+         while n is not None:
+            if n.value % 2 == 0:
+                print(n.value, end=' ')
+            n = n.next
+            
+#===========================================================            
+#task-03(check koro mile kina(ii))            
+    def checker(self):
+        x=int(input('ekta value diye check koren! '))
+        n=self.head
+        flag=False
+        while n is not None:
+            if n.value is x:
+                flag=True
+                break          
+            n=n.next 
+        print(flag)
+        
+#==========================================================
+#task-03(reverse koro(iii))    
+    def reverseKoro(self):        
+        prev=None      
+        n=self.head
+        while n is not None:
+            if n.next is None:
+                self.head = n
+            tmp=n.next
+            n.next=prev
+            prev=n
+            n=tmp
+        self.head=prev
+        
+            
+#==========================================================
+#task-05(sum koro(v))
+ 
+    def sumKoro(self):
+        sum=0
+        n=self.head
+        while n is not None:
+            sum=sum+n.value
+            n=n.next
+        print(sum)
+    
+#=============================================================        
+    
+    def sort(self):
+        n = self.head
+        while n:
+            n2 = n.next
+            while n2:
+                if n2.value<n.value:
+                    temp = n.value
+                    n.value = n2.value
+                    n2.value = temp
+                n2 = n2.next
+            n = n.next
+        
+#==========================================================
+
+    def Rotate(self,how,koibar):
+        if how=="left":
+            x=self.head
+            cnt2=0
+            i=self.head
+            while(cnt2<koibar):
+                while(i.next is not None):
+                    i=i.next
+                l=self.head
+                self.head=self.head.next
+                i.next=l
+                l.next=None
+                i=self.head
+                cnt2+=1
+        elif how=="right":
+            i=self.head
+        
+            cnt2=0
+            while(cnt2<koibar):
+            
+                while(i.next.next is not None):
+                    i=i.next
+                p=i.next
+                i.next=None
+                p.next=self.head
+                self.head=p
+                cnt2+=1
+                i=self.head
+        else:
+            raise TypeError("Unknown Type Of Rotation Given You Can try left Or right")
+
+#===========================================================        
+  
+    def insertSid(self,sid,index):
+        if index<0 or index>len(a): 
+            raise Exception('invalid index')
+            
+        
+        newNode=Node(sid%23,None)
+        n=self.head
+        while n is not None:
+            if n.value is sid: 
+                print('value already exist')
+                return
+            n=n.next
+            
+        counter=0
+        n=self.head
+        while counter is not (index-1):
+            n = n.next
+            counter=counter+1
+        tmp = n.next
+        n.next = newNode
+        newNode.next = tmp
+    
+ def insertBirthyear(self,birthYear,index):
+        if index<0 or index>len(a): 
+            raise Exception('invalid index')
+            
+        
+        newNode=Node(birthYear%61,None)
+        n=self.head
+        while n is not None:
+            if n.value is birthYear: 
+                print('value already exist')
+                return
+            n=n.next
+            
+        counter=0
+        n=self.head
+        while counter is not (index-1):
+            n = n.next
+            counter=counter+1
+        tmp = n.next
+        n.next = newNode
+        newNode.next = tmp            
+        
+            
+            
+a=[1,2,5,3,8]
+list=linkedList(a)
+#list.showList()
+#list.evenNaki()
+#list.checker()
+#list.insertSid(41,4)
+#list.insertBirthyear(1999,3)
+list.reverseKoro()
+list.showList()
+#list.sumKoro()
+'''

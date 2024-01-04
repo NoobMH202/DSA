@@ -1,0 +1,104 @@
+#stack-LAB04
+#TASK-01
+
+#exp='1+2*(3/4)'
+#exp='1+2*[3*3+{4–5(6(7/8/9)+10)–11+(12*8)]+14'
+#exp='1+2*[3*3+{4–5(6(7/8/9)+10)}–11+(12*8)/{13+13}]+14'
+exp='1+2]*[3*3+{4–5(6(7/8/9)+10)–11+(12*8)]+14'
+class Stack:
+    stack=[]
+    pointer=-1
+    def push(self,element):
+        self.stack.append(element)
+        self.pointer+=1
+    def peek(self):
+        if self.pointer==-1:
+            return True
+        return(self.stack[self.pointer])
+    
+    def pop(self):
+        value=self.stack[self.pointer]
+        self.stack=self.stack[:-1]
+        self.pointer-=1
+        return value
+stack1=Stack()
+
+for i in range(0,len(exp)):
+    if exp[i] == '[' or exp[i] == '{' or exp[i] == '(':
+        stack1.push(exp[i])
+    if exp[i]=='}' and stack1.peek()=='{':
+        stack1.pop()
+    elif exp[i]==']' and stack1.peek()=='[':
+        stack1.pop()
+    elif exp[i]==')' and stack1.peek()=='(':
+        stack1.pop()
+print(stack1.stack)
+
+# if stack1.peek()==None:
+if stack1.pointer==-1:    
+    print('exp is correct')
+    #print(stack1.peek())
+else:
+    print('exp is not correct')
+    print(stack1.peek())
+    print(stack1.pointer)
+        
+
+    
+
+
+#TASK-02
+
+class Node:
+    def __init__(self,value):
+        self.value=value
+        self.ref=None
+class Stack:
+    head=None
+    def push(self,value2):
+        if self.head==None:
+            self.head=Node(value2)
+        else:
+            n=Node(value2)
+            n.ref=self.head
+            self.head=n
+    def peek(self):
+        return (self.head.value)       
+    def pop(self):
+          temp=self.head
+          self.head=temp.ref
+          temp.value=None
+          temp.ref=None
+stack1=Stack()
+i=0
+cnt=0
+while(i<len(exp)):   
+    if exp[i]=='{' or exp[i]=='(' or exp[i]=='[':      
+        stack1.push(exp[i])
+        start=stack1.peek()     
+    elif exp[i]=='}' and stack1.head!=None or exp[i]==')'and stack1.head!=None or exp[i]  == ']' and stack1.head!=None :
+        last=exp[i]
+        start=stack1.peek()
+        if last=='}' and start=='{' or last==')' and start=='(' or last ==']' and start=='[' :
+            stack1.pop()
+    elif exp[i]=='}'and stack1.head==None or exp[i]==')'and stack1.head==None or exp[i]==']' and stack1.head==None :
+        print("wrong expression!")
+        print("Error at character# ",i+1,"'",exp[i],end=" '-not opened")
+        cnt=1
+        break
+    i+=1
+if stack1.head==None and cnt!=1:
+    print("Expression is correct")
+if stack1.head!=None and cnt!=1:
+    
+    j=0
+    while(j<len(exp)):
+        if stack1.head.value==exp[j]:
+            break
+        j+=1
+    print("Expression is wrong")
+    print("Error at character # ",j+1,"'",exp[j],end=" '-")
+    if exp[j]=="[" or exp[j]=="{" or exp[j]=="(":
+        print("it is not close")
+    else:
+        print("it is not open")
